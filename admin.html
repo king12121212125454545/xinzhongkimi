@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新中物業 - 管理後台</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>新中物業管理後台</h1>
+            <button id="logoutBtn" class="logout-btn">退出登入</button>
+        </header>
+
+        <div id="adminLogin" class="login-section">
+            <h2>管理員登入</h2>
+            <form id="adminLoginForm">
+                <input type="text" id="adminUsername" placeholder="管理員用戶名" required>
+                <input type="password" id="adminPassword" placeholder="密碼" required>
+                <button type="submit">登入</button>
+            </form>
+            <a href="index.html">返回客戶端</a>
+        </div>
+
+        <div id="adminPanel" style="display: none;">
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>總工單數</h3>
+                    <p id="totalTickets">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>待處理</h3>
+                    <p id="pendingTickets">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>處理中</h3>
+                    <p id="processingTickets">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>已完成</h3>
+                    <p id="completedTickets">0</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>所有工單</h2>
+                <div class="filters">
+                    <select id="statusFilter">
+                        <option value="">全部狀態</option>
+                        <option value="待處理">待處理</option>
+                        <option value="處理中">處理中</option>
+                        <option value="已完成">已完成</option>
+                    </select>
+                    <button id="exportBtn" class="export-btn">導出Excel</button>
+                </div>
+                <div id="allTickets" class="tickets-container">
+                    <p>加載中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="assignModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>分配維修師傅</h3>
+            <form id="assignForm">
+                <input type="hidden" id="ticketId">
+                <input type="text" id="workerName" placeholder="師傅姓名" required>
+                <button type="submit">確認分配</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

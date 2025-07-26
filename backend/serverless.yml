@@ -1,0 +1,34 @@
+# 阿里云函數計算 Serverless 配置
+service: xinzhong-property-mcp
+
+provider:
+  name: aliyun
+  runtime: nodejs14
+  region: cn-hangzhou
+  
+functions:
+  mcp-server:
+    handler: mcp-server.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+      - http:
+          path: /
+          method: ANY
+          cors: true
+    environment:
+      NODE_ENV: production
+      
+custom:
+  customDomain:
+    domainName: xinzhong-mcp.example.com  # 替換為你的域名
+    protocol: HTTP
+    routeConfigs:
+      - path: /*
+        serviceName: xinzhong-property-mcp
+        functionName: mcp-server
+        
+plugins:
+  - serverless-aliyun-function-compute

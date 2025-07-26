@@ -1,0 +1,114 @@
+{
+  "name": "xinzhong-property-mcp-server",
+  "version": "1.0.0",
+  "description": "新中物業工單系統 - 阿里云MCP後端服務",
+  "main": "mcp-server.js",
+  "scripts": {
+    "start": "node mcp-server.js",
+    "dev": "nodemon mcp-server.js",
+    "deploy": "serverless deploy",
+    "test": "node test-server.js"
+  },
+  "keywords": [
+    "mcp",
+    "property-management",
+    "work-order",
+    "aliyun",
+    "serverless"
+  ],
+  "author": "新中物業",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "serverless": "^3.38.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "mcp": {
+    "name": "xinzhong-property-workorder",
+    "version": "1.0.0",
+    "description": "新中物業維修工單管理系統",
+    "tools": [
+      {
+        "name": "create_ticket",
+        "description": "創建新的維修工單",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "customerId": { "type": "string" },
+            "location": { "type": "string" },
+            "floor": { "type": "string" },
+            "issue": { "type": "string" },
+            "contact": { "type": "string" }
+          },
+          "required": ["customerId", "location", "floor", "issue", "contact"]
+        }
+      },
+      {
+        "name": "get_tickets",
+        "description": "獲取工單列表",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "userId": { "type": "string" },
+            "status": { "type": "string" }
+          }
+        }
+      },
+      {
+        "name": "assign_worker",
+        "description": "分配維修師傅",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ticketId": { "type": "string" },
+            "worker": { "type": "string" }
+          },
+          "required": ["ticketId", "worker"]
+        }
+      },
+      {
+        "name": "complete_ticket",
+        "description": "標記工單完成",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ticketId": { "type": "string" }
+          },
+          "required": ["ticketId"]
+        }
+      },
+      {
+        "name": "register_customer",
+        "description": "客戶註冊",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "username": { "type": "string" },
+            "account": { "type": "string" },
+            "phone": { "type": "string" }
+          },
+          "required": ["username", "account", "phone"]
+        }
+      },
+      {
+        "name": "login_customer",
+        "description": "客戶登入",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "account": { "type": "string" },
+            "password": { "type": "string" }
+          },
+          "required": ["account", "password"]
+        }
+      }
+    ]
+  }
+}
